@@ -53,8 +53,6 @@ THE SOFTWARE.
 
 */
 
-/*! decimal.js-light v2.5.1 https://github.com/MikeMcl/decimal.js-light/LICENCE */
-
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 
 /*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
