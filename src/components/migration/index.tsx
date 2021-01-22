@@ -175,7 +175,7 @@ export const MigrationModal = () => {
         >
           <h2>Congratulations!</h2>
           <div>Your migration has been successful.</div>
-          <Button type="primary">Close</Button>
+          <Button type="primary" onClick={handleOk}>Close</Button>
         </div>
       ) : (
         <>
