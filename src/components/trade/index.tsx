@@ -42,9 +42,10 @@ export const TradeEntry = () => {
   const {
     A,
     B,
+    leverage,
     setLastTypedAccount,
     setPoolOperation,
-  } = useCurrencyPairState();
+} = useCurrencyPairState();
   const pool = usePoolForBasket([A?.mintAddress, B?.mintAddress]);
   const { slippage } = useSlippageConfig();
   const { tokenMap } = useConnectionConfig();
@@ -106,6 +107,7 @@ export const TradeEntry = () => {
         <AdressesPopover pool={pool} />
         <CurrencyInput
           title="Input"
+          leverage={leverage}
           onInputChange={(val: any) => {
             setPoolOperation(PoolOperation.SwapGivenInput);
             if (A.amount !== val) {
@@ -140,37 +142,7 @@ export const TradeEntry = () => {
           }}
         />
       </div>
-      <Button
-        className="trade-button"
-        type="primary"
-        size="large"
-        onClick={connected ? handleSwap : wallet.connect}
-        style={{ width: "100%" }}
-        disabled={
-          connected &&
-          (pendingTx ||
-            !A.account ||
-            !B.mintAddress ||
-            A.account === B.account ||
-            !A.sufficientBalance() ||
-            !pool)
-        }
-      >
-        {generateActionLabel(
-          !pool
-            ? POOL_NOT_AVAILABLE(
-                getTokenName(tokenMap, A.mintAddress),
-                getTokenName(tokenMap, B.mintAddress)
-              )
-            : SWAP_LABEL,
-          connected,
-          tokenMap,
-          A,
-          B,
-          true
-        )}
-        {pendingTx && <Spin indicator={antIcon} className="add-spinner" />}
-      </Button>
+      <ConnectButton />
       <TradeInfo pool={pool} />
     </>
   );
