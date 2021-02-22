@@ -39,8 +39,10 @@ export interface CurrencyContextState {
 export interface CurrencyPairContextState {
   A: CurrencyContextState;
   B: CurrencyContextState;
+  leverage: number;
   lastTypedAccount: string;
   setLastTypedAccount: (mintAddress: string) => void;
+  setLeverage: (leverage: number) => void;
   setPoolOperation: (swapDirection: PoolOperation) => void;
   options: PoolConfig;
   setOptions: (config: PoolConfig) => void;
@@ -97,6 +99,7 @@ export function CurrencyPairProvider({ children = null as any }) {
   const history = useHistory();
   const location = useLocation();
   const [lastTypedAccount, setLastTypedAccount] = useState("");
+  const [leverage, setLeverage] = useState(1.0);
   const [poolOperation, setPoolOperation] = useState<PoolOperation>(
     PoolOperation.Add
   );
@@ -234,6 +237,8 @@ export function CurrencyPairProvider({ children = null as any }) {
     connection,
     lastTypedAccount,
     poolOperation,
+    leverage,
+    setLeverage,
   ]);
 
   useEffect(() => {
@@ -245,9 +250,11 @@ export function CurrencyPairProvider({ children = null as any }) {
       value={{
         A: base,
         B: quote,
+        leverage: leverage,
         lastTypedAccount,
         setLastTypedAccount,
         setPoolOperation,
+        setLeverage,
         options,
         setOptions,
       }}
@@ -257,8 +264,11 @@ export function CurrencyPairProvider({ children = null as any }) {
   );
 }
 
-export const useCurrencyPairState = () => {
+export const useCurrencyPairState = (defaultLeverage = 1.0) => {
   const context = useContext(CurrencyPairContext);
+  const setLeverage = context?.setLeverage;
+  useEffect(() => setLeverage?.(defaultLeverage), [defaultLeverage, setLeverage]);
+
   return context as CurrencyPairContextState;
 };
 

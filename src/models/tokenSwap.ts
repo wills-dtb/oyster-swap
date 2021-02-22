@@ -133,7 +133,7 @@ export const createInitSwapInstruction = (
       BufferLayout.nu64("tradeFeeNumerator"),
       BufferLayout.nu64("tradeFeeDenominator"),
       BufferLayout.nu64("ownerTradeFeeNumerator"),
-      BufferLayout.nu64("ownerTradeFeeDenominator"),
+      BufferLayout.nu64("ownerTradeFeeDenominator"),,
       BufferLayout.nu64("ownerWithdrawFeeNumerator"),
       BufferLayout.nu64("ownerWithdrawFeeDenominator"),
       BufferLayout.nu64("hostFeeNumerator"),

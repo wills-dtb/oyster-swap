@@ -32,6 +32,15 @@ export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
               Pool
             </Link>
           </Menu.Item>
+          <Menu.Item key="/bull">
+            <Link
+              to={{
+                pathname: "/bull",
+              }}
+            >
+              Margin
+            </Link>
+          </Menu.Item>
           <Menu.Item key="/info">
             <Link
               to={{

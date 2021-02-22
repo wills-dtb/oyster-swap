@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   addLiquidity,
   usePoolForBasket,
@@ -50,6 +50,7 @@ export const AddToLiquidity = () => {
     options,
     setOptions,
   } = useCurrencyPairState();
+
   const [depositToken, setDepositToken] = useState<string>(A.mintAddress);
   const pool = usePoolForBasket([A?.mintAddress, B?.mintAddress]);
   const { slippage } = useSlippageConfig();

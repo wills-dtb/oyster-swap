@@ -9,6 +9,7 @@ import { CurrencyPairProvider } from "./utils/currencyPair";
 import { MarketProvider } from "./context/market";
 import { PoolOverview } from "./components/pool/view";
 import { ExchangeView } from "./components/exchange";
+import { MarginView } from "./views/margin";
 
 export function Routes() {
   return (
@@ -21,6 +22,9 @@ export function Routes() {
                 <CurrencyPairProvider>
                   <Route exact path="/" component={ExchangeView} />
                   <Route exact path="/add" component={ExchangeView} />
+                  <Route exact path="/bull" component={MarginView} />
+                  <Route exact path="/bear" component={MarginView} />
+                  <Route exact path="/margin-add" component={ExchangeView} />
                   <Route exact path="/info" component={() => <ChartsView />} />
                   <Route
                     exact

@@ -7,7 +7,7 @@ import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 export const AccountInfo = (props: {}) => {
   const { wallet } = useWallet();
-  const { account } = useNativeAccount();
+const { account } = useNativeAccount();
 
   if (!wallet || !wallet.publicKey) {
     return null;

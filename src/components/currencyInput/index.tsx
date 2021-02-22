@@ -75,7 +75,10 @@ export const CurrencyInput = (props: {
   amount?: string;
   title?: string;
   hideSelect?: boolean;
+  showLeverageSelector?: boolean;
+  leverage?: number;
   onInputChange?: (val: number) => void;
+  onLeverage?: (leverage: number) => void;
   onMintChange?: (account: string) => void;
 }) => {
   const { userAccounts } = useUserAccounts();
@@ -214,6 +217,43 @@ export const CurrencyInput = (props: {
           placeholder="0.00"
         />
         <div className="ccy-input-header-right" style={{ display: "felx" }}>
+          {(props.showLeverageSelector || true) && (
+            <Select
+              size="large"
+              showSearch
+              style={{ width: 80 }}
+              placeholder="CCY"
+              value={props.leverage}
+              onChange={(item: number) => {
+                if (props.onLeverage) props.onLeverage(item);
+              }}
+              notFoundContent={null}
+              onSearch={(item: string) => {
+                if (props.onLeverage && item.match(/^\d+$/)) {
+                  props.onLeverage(parseFloat(item));
+                }
+              }}
+              filterOption={(input, option) =>
+                option?.name?.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {[1, 2, 3, 4, 5].map((val) => (
+                <Option
+                  key={val}
+                  value={val}
+                  name={val + "x"}
+                  title={val + "x"}
+                >
+                  <div
+                    key={val}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    {val + "x"}
+                  </div>
+                </Option>
+              ))}
+            </Select>
+          )}
           {!props.hideSelect ? (
             <Select
               size="large"
